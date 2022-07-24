@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class Gun : Equippable
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] GameObject impactHolePrefab;
 
-    // Update is called once per frame
-    void Update()
+    /// <summary>
+    /// fire gun
+    /// </summary>
+    public override void Action()
     {
-        
+        RaycastHit hit;
+        Physics.Raycast(transform.position, transform.forward, out hit);
+        if (hit.collider.tag.Contains(""))
+        {
+            GameObject hole = Instantiate<GameObject>(impactHolePrefab, hit.point, hit.transform.rotation);
+            hole.transform.Rotate(new Vector3(90, 0, 0));
+        }
     }
 }

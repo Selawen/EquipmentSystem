@@ -1,20 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class EquipManager : MonoBehaviour
 {
     GameObject player;
+    [SerializeField] TextMeshProUGUI pickupText;
 
     [SerializeField] private Hand[] hands;
     [SerializeField] private Head head;
+
+    private Equippable pickupObj;
 
     // Start is called before the first frame update
     void Start()
     {
         player = FindObjectOfType<EquipManager>().gameObject;
-        hands = new Hand[]{ new Hand(), new Hand()};
-        head = new Head();
+        hands = new Hand[]{ ScriptableObject.CreateInstance<Hand>(), ScriptableObject.CreateInstance<Hand>()};
+        head = ScriptableObject.CreateInstance<Head>();
     }
 
     // Update is called once per frame
@@ -29,16 +33,62 @@ public class EquipManager : MonoBehaviour
     /// <param name="col"></param>
     private void OnCollisionEnter(Collision col)
     {
-        if (col.gameObject.TryGetComponent<Hat>(out Hat hat))
+        if (col.gameObject.TryGetComponent<Equippable>(out Equippable item))
         {
-            head.Equip(hat, player);
-            Debug.Log("equipped " + hat.name);
-            return;
+            pickupText.enabled = true;
+            pickupObj = item;
         }
-            if (col.gameObject.TryGetComponent<Equippable>(out Equippable item))
+    }
+
+    /// <summary>
+    /// make sure item can't be picked up outside range
+    /// </summary>
+    /// <param name="collision"></param>
+    private void OnCollisionExit(Collision collision)
+    {
+        if (pickupText.enabled || pickupObj != null)
         {
-            hands[0].Equip(item, player);
-            Debug.Log("equipped " + item.name);
+            pickupText.enabled = false;
+            pickupObj = null;
+        }
+    }
+
+    /// <summary>
+    /// pick up item with right hand if item is in range
+    /// </summary>
+    void OnRightHand()
+    {
+        //drop item if already holding one
+        if (hands[0].HoldingItem())
+        {
+            hands[0].UnEquip();
+        }
+
+        if (pickupObj != null)
+        {
+            hands[0].Equip(pickupObj, player);
+            pickupObj = null;
+            Debug.Log("equipped " + pickupObj.name + " to right hand");
+        }
+    }    
+    
+    /// <summary>
+    /// pick up item with left hand if item is in range
+    /// </summary>
+    void OnLeftHand()
+    {
+        //drop item if already holding one
+        if (hands[1].HoldingItem())
+        {
+            hands[1].UnEquip();
+        }
+
+        if (pickupObj != null)
+        {
+            pickupObj.offset.x *= -1;
+            hands[1].Equip(pickupObj, player);
+            pickupObj = null;
+            Debug.Log("equipped " + pickupObj.name + " to left hand");
         }
     }
 

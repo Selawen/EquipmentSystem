@@ -8,7 +8,8 @@ public class Flashlight : Equippable
 
     private void Start()
     {
-        offset = new Vector3(0, 0, 0.1f);
+        if (offset == new Vector3(0, 0, 0))
+            offset = new Vector3(0, 0, 0.1f);
     }
 
     /// <summary>

@@ -12,10 +12,13 @@ public class Hand : ScriptableObject
     /// <param name="item"></param>
     public void Equip(Equippable item, GameObject player)
     {
-        if (equippedItem != null)
-            equippedItem.OnUnEquip();
         equippedItem = item;
         item.OnEquip(player);
+    }
+
+    public void UnEquip()
+    {
+        equippedItem.OnUnEquip();
     }
 
     /// <summary>
@@ -25,5 +28,14 @@ public class Hand : ScriptableObject
     {
         if (equippedItem != null)
             equippedItem.Action();
+    }
+
+    /// <summary>
+    /// check if hand is currently holding an item
+    /// </summary>
+    /// <returns>true if holding item</returns>
+    public bool HoldingItem()
+    {
+        return equippedItem != null;
     }
 }

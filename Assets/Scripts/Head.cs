@@ -20,4 +20,9 @@ public class Head : ScriptableObject
         equippedHat = hat;
         hat.OnEquip(player);
     }
+
+    public void UnEquip()
+    {
+        equippedHat.OnUnEquip();
+    }
 }

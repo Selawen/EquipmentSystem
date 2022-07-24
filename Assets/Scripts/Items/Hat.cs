@@ -6,6 +6,15 @@ public class Hat : Equippable
 {
     private void Start()
     {
-        offset = new Vector3(0, 0.5f, 0);
+        if (offset == new Vector3(0, 0, 0))
+            offset = new Vector3(0.25f, 0, 0.5f);
+    }
+
+    /// <summary>
+    /// put hat on head
+    /// </summary>
+    public override void Action()
+    {
+        transform.localPosition = new Vector3(0, 1, 0);
     }
 }
