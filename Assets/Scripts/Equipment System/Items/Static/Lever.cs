@@ -18,6 +18,5 @@ public class Lever : Interactable
             transform.RotateAround(transform.position - transform.up*0.5f, transform.right, -90);
             up = true;
         }
-
     }
 }

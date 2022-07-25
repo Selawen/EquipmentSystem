@@ -44,6 +44,14 @@
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "AutoMode",
+                    "type": "Button",
+                    "id": "1bc2daf4-7bdb-4450-a131-af8c9f4bc8d1",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -145,6 +153,17 @@
                     "action": "move",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "39eabaf8-4c8d-44e0-8c13-35c2e58fc57c",
+                    "path": "<Keyboard>/o",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AutoMode",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
