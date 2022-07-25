@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class Door : Interactable
 {
-    // Start is called before the first frame update
-    void Start()
+    bool open = false;
+    public override void Action()
     {
-        
-    }
+        if (open)
+        {
+            transform.RotateAround(transform.position + transform.right, transform.up, -90);
+            open = false;
+        } else
+        {
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+            transform.RotateAround(transform.position + transform.right, transform.up, 90);
+            open = true;
+        }
+
     }
 }

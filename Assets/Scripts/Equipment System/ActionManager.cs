@@ -9,12 +9,15 @@ public class ActionManager : MonoBehaviour
 
     [Tooltip("the text to display when an item can be picked up")]
     [SerializeField] TextMeshProUGUI pickupText;
+    [Tooltip("the text to display when an item can be interacted with")]
+    [SerializeField] TextMeshProUGUI interactionText;
 
     [Header("Equip slots")]
     [SerializeReference] private Hand[] hands;
     [SerializeReference] private Head head;
 
     private Equippable pickupObj;
+    private Interactable interactObj;
 
     // Start is called before the first frame update
     void Start()
@@ -40,6 +43,13 @@ public class ActionManager : MonoBehaviour
         {
             pickupText.enabled = true;
             pickupObj = item;
+            return;
+        }
+        if (col.gameObject.TryGetComponent<Interactable>(out Interactable obj))
+        {
+            interactionText.enabled = true;
+            interactObj = obj;
+            return;
         }
     }
 
@@ -49,10 +59,16 @@ public class ActionManager : MonoBehaviour
     /// <param name="collision"></param>
     private void OnCollisionExit(Collision collision)
     {
-        if (pickupText.enabled || pickupObj != null)
+        if (pickupObj == collision.gameObject.GetComponent<Equippable>() && pickupObj != null)
         {
             pickupText.enabled = false;
             pickupObj = null;
+            return;
+        }if (interactObj == collision.gameObject.GetComponent<Interactable>() && interactObj != null)
+        {
+            interactionText.enabled = false;
+            interactObj = null;
+            return;
         }
     }
 
@@ -61,6 +77,12 @@ public class ActionManager : MonoBehaviour
     /// </summary>
     void OnRightHand()
     {
+        if (interactObj != null)
+        {
+            interactObj.Action();
+            return;
+        }
+
         //drop item if already holding one
         if (hands[0].HoldingItem())
         {
@@ -82,6 +104,12 @@ public class ActionManager : MonoBehaviour
     /// </summary>
     void OnLeftHand()
     {
+        if (interactObj != null)
+        {
+            interactObj.Action();
+            return;
+        }
+
         //drop item if already holding one
         if (hands[1].HoldingItem())
         {
