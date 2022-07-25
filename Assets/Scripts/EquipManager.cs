@@ -69,7 +69,9 @@ public class EquipManager : MonoBehaviour
             hands[0].Equip(pickupObj, this);
             //hands[0].Equip(pickupObj, player);            
             Debug.Log("equipped " + pickupObj.name + " to right hand");
+            
             pickupObj = null;
+            pickupText.enabled = false;
         }
     }    
     
@@ -90,7 +92,9 @@ public class EquipManager : MonoBehaviour
             //hands[1].Equip(pickupObj, player);
             hands[1].Equip(pickupObj, this);
             Debug.Log("equipped " + pickupObj.name + " to left hand");
+            
             pickupObj = null;
+            pickupText.enabled = false;
         }
     }
 

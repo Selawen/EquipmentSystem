@@ -24,5 +24,6 @@ public class Head : ScriptableObject
     public void UnEquip()
     {
         equippedHat.OnUnEquip();
+        equippedHat = null;
     }
 }

@@ -15,6 +15,7 @@ public class Hand : ScriptableObject
         equippedItem = item;
         item.OnEquip(player);
     }
+
     public void Equip(Equippable item, EquipManager player)
     {
         equippedItem = item;
@@ -48,12 +49,15 @@ public class Hand : ScriptableObject
         return equippedItem != null;
     }
 
+    /// <summary>
+    /// return gun if holding one
+    /// </summary>
+    /// <returns>gun currently held</returns>
     public Gun HoldingGun()
     {
         if (equippedItem.GetType() == typeof(Gun))
         {
             return (Gun)equippedItem;
-            Debug.Log("Holding gun");
         }
         else
             return null;
