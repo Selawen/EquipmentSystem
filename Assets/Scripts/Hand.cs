@@ -5,17 +5,11 @@ using UnityEngine;
 public class Hand : ScriptableObject
 {
     Equippable equippedItem;
-
+    
     /// <summary>
     /// set equipped item to new item
     /// </summary>
     /// <param name="item"></param>
-    public void Equip(Equippable item, GameObject player)
-    {
-        equippedItem = item;
-        item.OnEquip(player);
-    }
-
     public void Equip(Equippable item, EquipManager player)
     {
         equippedItem = item;
@@ -55,11 +49,31 @@ public class Hand : ScriptableObject
     /// <returns>gun currently held</returns>
     public Gun HoldingGun()
     {
+        if (equippedItem == null)
+            return null;
+
         if (equippedItem.GetType() == typeof(Gun))
         {
             return (Gun)equippedItem;
         }
-        else
+        
+        return null;
+    }
+    
+    /// <summary>
+    /// return hat if holding one
+    /// </summary>
+    /// <returns>hat currently held</returns>
+    public Hat HoldingHat()
+    {
+        if (equippedItem == null)
             return null;
+
+        if (equippedItem.GetType() == typeof(Hat))
+        {
+            return (Hat)equippedItem;
+        }
+        
+        return null;
     }
 }

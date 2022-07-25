@@ -147,6 +147,33 @@
                     "isPartOfComposite": true
                 }
             ]
+        },
+        {
+            "name": "gameNav",
+            "id": "3679ef8d-9c53-4f71-a3b5-7dc83b0c260f",
+            "actions": [
+                {
+                    "name": "pausebtn",
+                    "type": "Button",
+                    "id": "358a58c7-f235-4498-a28c-ceec8f0cadd3",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "9da5fc57-c54d-44e7-8b20-3541abca2b81",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "pausebtn",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []

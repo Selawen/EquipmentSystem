@@ -4,23 +4,33 @@ using UnityEngine;
 
 public class Rock : Equippable
 {
-
     Rigidbody rb;
 
     private void Start()
     {
-
         rb = GetComponent<Rigidbody>();
     }
     private void FixedUpdate()
     {
-        //eventually stop rock from rolling away after throwing
-        if (rb.useGravity && rb.velocity.magnitude < 0.25f && GetComponent<Collider>().enabled)
+        //stop rock from rolling when almost stopped
+        if (rb.useGravity && rb.velocity.magnitude < 0.25f && GetComponent<Collider>().enabled || transform.position.y<0.08)
         {
             rb.constraints = RigidbodyConstraints.FreezeAll;
             rb.useGravity = false;
         }
     }
+
+    /// <summary>
+    /// disable item collision and parent item to player on equip
+    /// </summary>
+    /// <param name="player"></param>
+    public override void OnEquip(GameObject player)
+    {   
+        rb.useGravity = false;
+        rb.constraints = RigidbodyConstraints.FreezeAll;
+        base.OnEquip(player);
+    }
+
     /// <summary>
     /// throw rock
     /// </summary>
@@ -33,6 +43,7 @@ public class Rock : Equippable
         transform.parent = null;
 
         StartCoroutine(UnEquip());
+        StartCoroutine(ResetPhysics());
     }
 
     /// <summary>
@@ -45,5 +56,15 @@ public class Rock : Equippable
         GetComponent<Collider>().enabled = true;
     }
 
+    /// <summary>
+    /// reset the rigidbody to start condition after a while
+    /// </summary>
+    /// <returns></returns>
+    IEnumerator ResetPhysics()
+    {
+        yield return new WaitForSeconds(10);
 
+        rb.constraints = RigidbodyConstraints.FreezeAll;
+        rb.useGravity = false;
+    }
 }

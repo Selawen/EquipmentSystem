@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 6774678575779111585}
   - component: {fileID: 6774678575779111584}
   - component: {fileID: 6774678575779111587}
-  - component: {fileID: 6774678575779111586}
   - component: {fileID: 6774678575779111581}
+  - component: {fileID: 6774678575779111586}
   m_Layer: 0
   m_Name: Rock
   m_TagString: Untagged
@@ -97,19 +97,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &6774678575779111586
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6774678575779111580}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3d8fdfbe4274a34587c296a22dc8ddd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  offset: {x: 0.25, y: 0, z: 0.5}
 --- !u!54 &6774678575779111581
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -126,3 +113,16 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!114 &6774678575779111586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6774678575779111580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3d8fdfbe4274a34587c296a22dc8ddd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offset: {x: 0.25, y: 0, z: 0.5}
