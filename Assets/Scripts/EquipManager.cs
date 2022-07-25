@@ -16,7 +16,7 @@ public class EquipManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        player = FindObjectOfType<EquipManager>().gameObject;
+        player = this.gameObject;
         hands = new Hand[]{ ScriptableObject.CreateInstance<Hand>(), ScriptableObject.CreateInstance<Hand>()};
         head = ScriptableObject.CreateInstance<Head>();
     }
@@ -66,9 +66,10 @@ public class EquipManager : MonoBehaviour
 
         if (pickupObj != null)
         {
-            hands[0].Equip(pickupObj, player);
-            pickupObj = null;
+            hands[0].Equip(pickupObj, this);
+            //hands[0].Equip(pickupObj, player);            
             Debug.Log("equipped " + pickupObj.name + " to right hand");
+            pickupObj = null;
         }
     }    
     
@@ -86,9 +87,10 @@ public class EquipManager : MonoBehaviour
         if (pickupObj != null)
         {
             pickupObj.offset.x *= -1;
-            hands[1].Equip(pickupObj, player);
-            pickupObj = null;
+            //hands[1].Equip(pickupObj, player);
+            hands[1].Equip(pickupObj, this);
             Debug.Log("equipped " + pickupObj.name + " to left hand");
+            pickupObj = null;
         }
     }
 
@@ -106,5 +108,16 @@ public class EquipManager : MonoBehaviour
     void OnLeftItem()
     {
         hands[1].UseItem();
+    }
+
+    public Gun IsHoldingGun()
+    {
+        for (int i = 0; i < 2; i++)
+        {
+            Gun g = hands[i].HoldingGun();
+            if (g != null)
+                return g;
+        }
+        return null;
     }
 }

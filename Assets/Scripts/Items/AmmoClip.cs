@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class AmmoClip : Equippable
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] int ammo;
 
-    // Update is called once per frame
-    void Update()
+    /// <summary>
+    /// reload gun if gun is in other hand
+    /// </summary>
+    public override void Action()
     {
+        Gun g = equipManager.IsHoldingGun();
         
+        if (g != null)
+        {
+            g.AddAmmo(ammo);
+            Destroy(this.gameObject);
+        }
     }
 }

@@ -7,7 +7,7 @@ public class Hand : ScriptableObject
     Equippable equippedItem;
 
     /// <summary>
-    /// set equippedItem to new item
+    /// set equipped item to new item
     /// </summary>
     /// <param name="item"></param>
     public void Equip(Equippable item, GameObject player)
@@ -15,10 +15,19 @@ public class Hand : ScriptableObject
         equippedItem = item;
         item.OnEquip(player);
     }
+    public void Equip(Equippable item, EquipManager player)
+    {
+        equippedItem = item;
+        item.OnEquip(player);
+    }
 
+    /// <summary>
+    /// unequip item currently held
+    /// </summary>
     public void UnEquip()
     {
-        equippedItem.OnUnEquip();
+        equippedItem.OnUnEquip();        
+        equippedItem = null;
     }
 
     /// <summary>
@@ -37,5 +46,16 @@ public class Hand : ScriptableObject
     public bool HoldingItem()
     {
         return equippedItem != null;
+    }
+
+    public Gun HoldingGun()
+    {
+        if (equippedItem.GetType() == typeof(Gun))
+        {
+            return (Gun)equippedItem;
+            Debug.Log("Holding gun");
+        }
+        else
+            return null;
     }
 }
