@@ -17,4 +17,9 @@ public class GameManager : MonoBehaviour
         Time.timeScale = pausePanel.activeSelf ? 1 : 0;
         pausePanel.SetActive(!pausePanel.activeSelf);
     }
+
+    public void QuitButton()
+    {
+        Application.Quit();
+    }
 }
