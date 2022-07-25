@@ -10,7 +10,7 @@ public class Head : ScriptableObject
     /// set equippedHat to new hat
     /// </summary>
     /// <param name="hat">hat to equip</param>
-    public void Equip(Hat hat, EquipManager player)
+    public void Equip(Hat hat, ActionManager player)
     {
         if (equippedHat != null)
         {

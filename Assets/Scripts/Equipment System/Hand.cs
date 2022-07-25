@@ -10,7 +10,7 @@ public class Hand : ScriptableObject
     /// set equipped item to new item
     /// </summary>
     /// <param name="item"></param>
-    public void Equip(Equippable item, EquipManager player)
+    public void Equip(Equippable item, ActionManager player)
     {
         equippedItem = item;
         item.OnEquip(player);

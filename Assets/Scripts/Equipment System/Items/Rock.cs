@@ -24,7 +24,7 @@ public class Rock : Equippable
     /// disable item collision and parent item to player on equip
     /// </summary>
     /// <param name="player"></param>
-    public override void OnEquip(GameObject player)
+    public override void OnEquip(ActionManager player)
     {   
         rb.useGravity = false;
         rb.constraints = RigidbodyConstraints.FreezeAll;

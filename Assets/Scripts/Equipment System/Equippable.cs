@@ -7,7 +7,7 @@ public class Equippable : MonoBehaviour
     [Tooltip("the offset to use when equipping to right hand")]
     public Vector3 offset = new Vector3(0,0,0);
 
-    protected EquipManager equipManager;
+    protected ActionManager equipManager;
 
     private void Start()
     {
@@ -25,7 +25,7 @@ public class Equippable : MonoBehaviour
     /// disable item collision and parent item to player on equip
     /// </summary>
     /// <param name="player"></param>
-    public virtual void OnEquip(EquipManager player)
+    public virtual void OnEquip(ActionManager player)
     {
         equipManager = player;
         GetComponent<Rigidbody>().Sleep();
